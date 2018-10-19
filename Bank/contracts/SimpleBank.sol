@@ -38,16 +38,14 @@ contract SimpleBank {
            Subtract the amount from the sender's balance, and try to send that amount of ether
            to the user attempting to withdraw. IF the send fails, add the amount back to the user's balance
            return the user's balance.*/
-
     }
 
     /// @notice Get balance
     /// @return The balance of the user
     // A SPECIAL KEYWORD prevents function from editing state variables;
     // allows function to run locally/off blockchain
-    function balance() public constant returns (uint) {
+    function balance() public view returns (uint) {
         /* Get the balance of the sender of this transaction */
-
     }
 
     // Fallback function - Called if other functions don't match call or
