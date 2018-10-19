@@ -1,4 +1,4 @@
-# smartContracts_exercises
+# Smart Contracts exercises
 
 ## [Bank](https://github.com/ballesterosbr/smartContracts_exercises/tree/master/Bank)
 *Credits: Consensys Academy*
