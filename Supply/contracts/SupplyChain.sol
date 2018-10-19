@@ -3,7 +3,6 @@ pragma solidity ^0.4.23;
 contract SupplyChain {
 
   /* set owner */
-  address owner;
 
   /* Add a variable called skuCount to track the most recent sku # */
 
