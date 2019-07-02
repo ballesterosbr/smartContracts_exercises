@@ -1,4 +1,4 @@
-pragma solidity 0.4.24;
+pragma solidity ^0.5.0;
 
 contract Ownable {
     
@@ -22,7 +22,7 @@ contract Purchase is Ownable {
 
     struct Article {
         uint id;
-        address seller;
+        address payable seller;
         address buyer;
         uint256 price;
         State status;

@@ -1,4 +1,4 @@
-pragma solidity ^0.4.13;
+pragma solidity ^0.5.0;
 
 contract SimpleBank {
 
@@ -11,7 +11,7 @@ contract SimpleBank {
     /* Add 2 arguments for this event, an accountAddress and an amount */
 
     // Constructor, can receive one or many variables here; only one allowed
-    constructor() {
+    constructor() public{
         /* Set the owner to the creator of this contract */
     }
 
@@ -53,7 +53,7 @@ contract SimpleBank {
     // Typically, called when invalid data is sent
     // Added so ether sent to this contract is reverted if the contract fails
     // otherwise, the sender's money is transferred to contract
-    function () {
+    function () external{
         revert();
     }
 }

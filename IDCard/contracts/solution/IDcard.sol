@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity ^0.5.0;
 
 /**
 Create a Factory contract called IDcard
@@ -41,9 +41,9 @@ contract IDcard {
         users[msg.sender].issuer = address(this);
         users[msg.sender].IDowner = msg.sender;
         UserID _contractID = new UserID(msg.sender);
-        users[msg.sender].userID = _contractID;
+        users[msg.sender].userID = address(_contractID);
         users[msg.sender].timestamp = now;
-        emit IdCreated (msg.sender, now,_contractID);
+        emit IdCreated (msg.sender, now, address(_contractID));
     }
     
     /** 
@@ -107,7 +107,7 @@ contract UserID {
     Use isData to check if data already exists. If is empty, data can be created.
     Emit the event.
     */
-    function newInfo (string _name, string _lastname, uint _age, uint256 _id_number, string _birthdate, bool _gender, string _city, string _country)
+    function newInfo (string memory _name, string memory _lastname, uint _age, uint256 _id_number, string memory _birthdate, bool _gender, string memory _city, string memory _country)
         public
         onlyOwner
     {
@@ -121,7 +121,7 @@ contract UserID {
         myId[msg.sender].gender = _gender;
         myId[msg.sender].city = _city;
         myId[msg.sender].country = _country;
-        emit Create (msg.sender, now, this);
+        emit Create (msg.sender, now, address(this));
     }
     
     /**
@@ -130,7 +130,7 @@ contract UserID {
     Use isData to check if data already exists. If is not empty, data can be updated.
     Emit the event.
     */
-    function updateInfo (string _name, string _lastname, uint _age, uint256 _id_number, string _birthdate, bool _gender, string _city, string _country)
+    function updateInfo (string memory _name, string memory _lastname, uint _age, uint256 _id_number, string memory _birthdate, bool _gender, string memory _city, string memory _country)
         public
         onlyOwner
     {   
@@ -143,7 +143,7 @@ contract UserID {
         myId[msg.sender].gender = _gender;
         myId[msg.sender].city = _city;
         myId[msg.sender].country = _country;
-        emit Create (msg.sender, now, this);
+        emit Create (msg.sender, now, address(this));
     }
     
     /** 
@@ -153,7 +153,7 @@ contract UserID {
     function getInfo ()
         public
         view
-        returns (string, string, uint, uint256, string, bool, string, string)
+        returns (string memory, string memory, uint, uint256, string memory, bool, string memory, string memory)
     {
         return (
             myId[msg.sender].name,
@@ -180,6 +180,6 @@ contract UserID {
         require(isData != false);
         delete myId[msg.sender];
         isData = false;
-        emit Delete(msg.sender, now, this);
+        emit Delete(msg.sender, now, address(this));
     }
 }

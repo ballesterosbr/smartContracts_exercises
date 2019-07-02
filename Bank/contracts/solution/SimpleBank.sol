@@ -1,4 +1,4 @@
-pragma solidity ^0.4.13;
+pragma solidity ^0.5.0;
 
 contract SimpleBank {
 
@@ -13,14 +13,14 @@ contract SimpleBank {
     event LogDeposit(address accountAddress, uint amount);
 
     // Constructor, can receive one or many variables here; only one allowed
-    constructor() {
+    constructor() public{
         /* Set the owner to the creator of this contract */
         owner = msg.sender;
     }
 
     /// @notice Enroll a customer with the bank, giving them 1000 tokens for free
     /// @return The balance of the user after enrolling
-    function enroll() public returns (uint){
+    function enroll() public returns (uint) {
         balances[msg.sender] = 1000; 
         return balances[msg.sender];
       /* Set the sender's balance to 1000, return the sender's balance */
@@ -41,7 +41,7 @@ contract SimpleBank {
     /// @dev This does not return any excess ether sent to it
     /// @param withdrawAmount amount you want to withdraw
     /// @return The balance remaining for the user
-    function withdraw(uint withdrawAmount) public returns (uint remainingBal) {
+    function withdraw(uint withdrawAmount) public returns (uint) {
         require(balances[msg.sender] >= withdrawAmount);
         balances[msg.sender] -= withdrawAmount;
         msg.sender.transfer(withdrawAmount);
@@ -58,7 +58,7 @@ contract SimpleBank {
     /// @return The balance of the user
     // A SPECIAL KEYWORD prevents function from editing state variables;
     // allows function to run locally/off blockchain
-    function balance() public constant returns (uint) {
+    function balance() public view returns (uint) {
         /* Get the balance of the sender of this transaction */
 
         return balances[msg.sender];
@@ -70,7 +70,7 @@ contract SimpleBank {
     // Typically, called when invalid data is sent
     // Added so ether sent to this contract is reverted if the contract fails
     // otherwise, the sender's money is transferred to contract
-    function () public payable{
+    function () external payable{
         revert();
     }
 }
